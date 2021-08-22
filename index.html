@@ -73,7 +73,7 @@
       url: isMapboxRequest ? url.replace("?", "?pluginName=sheetMapper&") : url
     };
   };
-  mapboxgl.accessToken = 'pk.eyJ1IjoieW9naHVydG9uIiwiYSI6ImNrMWMzaTRodTAwMXkzbG5wdXJvMXFuYXoifQ.7TYzn64qL5_Kktp--kX6Dw';
+  mapboxgl.accessToken = 'pk.eyJ1IjoidG8xMDI3bWUiLCJhIjoiY2tzbjF4bXAyMGNqdzJ2cDdwdzI0OTVldSJ9.ZKk8MDD4Jchfsqi3ngZlJg';
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/satellite-streets-v11',
@@ -84,7 +84,7 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: 'https://docs.google.com/spreadsheets/d/1KIZpRo-WztrCLK4GreknsYz4bT6Mv5FgtUgzNz0GUQ0/gviz/tq?tqx=out:csv&sheet=map data',
+      url: 'https://docs.google.com/spreadsheets/d/1ry2hwuzi-SArBQhrsDAP9LTJHBbi3hAyWGo9a4JBxfI/gviz/tq?tqx=out:csv&sheet=map data',
       dataType: "text",
       success: function (csvData) {
         makeGeoJSON(csvData);
