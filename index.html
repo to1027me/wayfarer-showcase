@@ -73,7 +73,7 @@
       url: isMapboxRequest ? url.replace("?", "?pluginName=sheetMapper&") : url
     };
   };
-  mapboxgl.accessToken = 'pk.eyJ1IjoidG8xMDI3bWUiLCJhIjoiY2tzbjd5a2l3MGsyajJwbGVuYWl3eGEweSJ9.dC0Ps8gpYzUIy6g8FaqnvA';
+  mapboxgl.accessToken = 'pk.eyJ1IjoieW9naHVydG9uIiwiYSI6ImNrMWMzaTRodTAwMXkzbG5wdXJvMXFuYXoifQ.7TYzn64qL5_Kktp--kX6Dw';
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/yoghurton/cksn875dm2ivp17poo64eew9m',
@@ -98,22 +98,6 @@
         delimiter: ','
       }, function (err, data) {
         map.on('load', function () {
-          map.addLayer({
-            'id': 'csvData',
-            'type': 'circle',
-            'source': {
-              'type': 'geojson',
-              'data': data
-            },
-            'paint': {
-              'circle-radius': 5.0,
-              'circle-color': '#ff0099',
-              'circle-stroke-width': 1.5,
-              'circle-stroke-color': '#222222'
-            },
-            'filter': ['==', '$type', 'Point'],
-          });
-          
           map.addSource("cells", {
             "type": "geojson",
             "data": {
@@ -732,6 +716,21 @@
                 },
                 "properties": {
                   "cell": "NR15-CHARLIE-09"
+                }
+              }, {
+                "type": "Feature",
+                "geometry": {
+                  "type": "LineString",
+                  "coordinates": [
+                    [147.306044, 46.457519],
+                    [148.525472, 45.485433],
+                    [150.188095, 45.977796],
+                    [149.005390, 46.984342],
+                    [147.306044, 46.457519]
+                  ]
+                },
+                "properties": {
+                  "cell": "NR15-DELTA-12"
                 }
               }, {
                 "type": "Feature",
@@ -1439,8 +1438,22 @@
               'line-opacity': 0.5,
               'line-width': 2,
             }
-          });          
-          
+          });
+          map.addLayer({
+            'id': 'csvData',
+            'type': 'circle',
+            'source': {
+              'type': 'geojson',
+              'data': data
+            },
+            'paint': {
+              'circle-radius': 5.0,
+              'circle-color': '#ff0099',
+              'circle-stroke-width': 1.5,
+              'circle-stroke-color': '#222222'
+            },
+            'filter': ['==', '$type', 'Point'],
+          });
           map.on('click', 'csvData', function (e) {
             var coordinates = e.features[0].geometry.coordinates.slice();
             var description = `<h3>` + e.features[0].properties.title + `</h3>` + `<h4>` + `<b>` + `Location: ` + `</b>` + e.features[0].properties.location + `</h4>` + `<h4>` + `<b>` + `Intel: ` + `</b><a href="` + e.features[0].properties.intel + `">` + e.features[0].properties.intel + `</a></h4>` + `<img src="` + e.features[0].properties.image + `">`;
